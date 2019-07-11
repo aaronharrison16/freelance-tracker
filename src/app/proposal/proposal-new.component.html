@@ -4,7 +4,7 @@
       <h1>Create a Proposal</h1>
 
       <div>
-        <form #proposalForm='ngForm'>
+        <form (ngSubmit)="createProposal(proposal)" #proposalForm='ngForm'>
           <div class="form-group">
             <label for='customer'>Customer Name</label>
             <input type='text'
@@ -122,6 +122,22 @@
                     #client_email='ngModel'
                     [(ngModel)]="proposal.client_email" 
             >
+          </div>
+
+          <button type="submit" 
+            class='btn btn-info btn-lg'
+            [disabled]="!proposalForm.form.valid"
+            [hidden]="submitted"
+          >
+            Generate Proposal
+          </button>
+
+          <div
+            [hidden]="!submitted"
+            class='alert alert-success'
+            role='alert'
+          >
+            Your proposal has been created. <a class="alert-link" routerLink='/proposals'>View all proposals</a>
           </div>
         </form>
       </div>
